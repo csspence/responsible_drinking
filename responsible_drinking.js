@@ -29,6 +29,37 @@ To keep the things simple, we'll considere that any "numbered thing" in the stri
 or "1 chainsaw and 2 pools" => "3 glasses of water"...
 */
 
-function hydrate(s) {
-  // your code here
+const hydrate = (s) => {
+  const numObj = {
+    1 : '1',
+    2 : '2',
+    3 : '3',
+    4 : '4',
+    5 : '5',
+    6 : '6',
+    7 : '7',
+    8 : '8',
+    9 : '9',
+    0 : '0'
+  }
+  let currentNum = '';
+  let waters = 0;
+  for(let i = 0; i < s.length; i++) {
+    if(i === 0 && numObj[s[i]] === s[i]) {
+      currentNum += s[i];
+    }
+    if(i > 0 && i !== s.length - 1 && numObj[s[i]] === s[i]) {
+      currentNum += s[i];
+    }
+    if(i > 0 && numObj[s[i]] !== s[i] && currentNum.length > 0) {
+      waters += parseInt(currentNum);
+      currentNum = '';
+    }
+    if(i === s.length - 1 && numObj[s[i]] === s[i]) {
+      currentNum += s[i];
+      waters += parseInt(currentNum);
+    }
+  }
+
+  return waters === 1 ? waters + ' glass of water' : waters + ' glasses of water';
 }
